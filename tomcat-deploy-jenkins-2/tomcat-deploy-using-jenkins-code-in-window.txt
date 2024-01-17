@@ -1,0 +1,12 @@
+Que.How to test ,build-test ,test-production ,build-test-deploy?
+------------------------------------------------------------
+step-1: create job using pipeline option section.
+step-2: use jenkins.txt code in script section.
+step-3: integrate your job with slack .
+      =>create channel.
+      =>go to channel install jenkins.
+      =>Do configuration according to provide information.
+for more info just watch video.      
+      
+      
+      

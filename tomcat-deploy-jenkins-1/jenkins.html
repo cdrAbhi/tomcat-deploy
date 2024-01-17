@@ -1,0 +1,108 @@
+Certainly! Here's the information formatted as HTML code:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jenkins CI/CD Setup</title>
+</head>
+<body>
+
+    <h1>Setting Up a Jenkins CI/CD Pipeline for a Java Application on AWS EC2 Instances</h1>
+
+    <h2>Infrastructure Setup:</h2>
+
+    <ol>
+        <li><strong>EC2 Instances:</strong> Deploy two EC2 instances on AWS, designating one for testing and another for deployment.</li>
+        <li>
+            <strong>Tomcat 9 Installation:</strong> Install Apache Tomcat 9 on both instances to serve as the application containers.
+        </li>
+        <li>
+            <strong>Tomcat User Configuration:</strong> Secure the Tomcat instances by configuring <code>tomcat-users.xml</code> with necessary roles and user credentials:
+            <pre>
+                &lt;role rolename="manager-gui"/&gt;
+                &lt;user username="abhi" password="9954" roles="manager-gui,manager-script,manager-jmx,manager-status"/&gt;
+            </pre>
+        </li>
+    </ol>
+
+    <h2>Accessing Tomcat Instances:</h2>
+
+    <ul>
+        <li>
+            Utilize the public IP addresses of the instances:
+            <ul>
+                <li>Testing Instance: <a href="http://<testing-instance-public-ip>:8080" target="_blank">http://&lt;testing-instance-public-ip&gt;:8080</a></li>
+                <li>Deployment Instance: <a href="http://<deployment-instance-public-ip>:8080" target="_blank">http://&lt;deployment-instance-public-ip&gt;:8080</a></li>
+            </ul>
+        </li>
+        <li>Deployed applications can be accessed using: <a href="http://<deployment-instance-public-ip>:8080/app" target="_blank">http://&lt;deployment-instance-public-ip&gt;:8080/app</a></li>
+    </ul>
+
+    <h2>Jenkins Configuration:</h2>
+
+    <ol>
+        <li>
+            <strong>Essential Plugins:</strong> Install the required Jenkins plugins:
+            <ul>
+                <li>Maven Integration</li>
+                <li>Docker</li>
+                <li>Copy Artifact</li>
+                <li>Build Pipeline</li>
+            </ul>
+        </li>
+        <li>
+            <strong>Jenkins Jobs:</strong>
+            <ul>
+                <li><strong>a-test Job:</strong>
+                    <ul>
+                        <li>Clone the GitHub repository.</li>
+                        <li>Trigger the build of another project (b-build).</li>
+                    </ul>
+                </li>
+                <li><strong>b-build Job:</strong>
+                    <ul>
+                        <li>Clone the GitHub repository.</li>
+                        <li>Execute builds of other projects (c-build-test).</li>
+                        <li>Configure permissions for artifact copying to c*.</li>
+                        <li>Generate an artifact.</li>
+                    </ul>
+                </li>
+                <li><strong>c-build-test Job:</strong>
+                    <ul>
+                        <li>Manually trigger the build of another project (c-buildz-deploy).</li>
+                        <li>Copy artifacts to c-build-test.</li>
+                        <li>Generate an artifact.</li>
+                        <li>Deploy war/ear files to the Tomcat container.</li>
+                    </ul>
+                </li>
+                <li><strong>c-buildz-test Job:</strong>
+                    <ul>
+                        <li>Copy artifacts to c-build-test.</li>
+                        <li>Deploy war/ear files to the Tomcat container.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ol>
+
+    <h2>Automation Workflow:</h2>
+
+    <ul>
+        <li>
+            This orchestrated setup automates the testing, building, and deployment of a Java application sourced from a GitHub repository.
+        </li>
+        <li>
+            The pipeline triggers automatically upon any changes to the GitHub repository, ensuring seamless integration.
+        </li>
+    </ul>
+
+    <p>Ensure each step is meticulously tested before integrating into the complete pipeline. For further assistance or specific queries, feel free to seek guidance.</p>
+
+</body>
+</html>
+```
+
+You can copy and paste this HTML code into an HTML file or an HTML editor to visualize the content.

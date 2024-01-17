@@ -1,0 +1,80 @@
+pipeline {
+    agent {
+        label 'window'
+    }
+    tools {
+        maven 'Maven'
+    }
+
+    stages {
+        stage('Clone and Test') {
+            steps {
+                script {
+                   // Delete the existing directory
+                //bat 'rmdir /s /q Spring-boot-war-file'
+
+                // Clone the Git repository
+                git branch: 'main', url: 'https://github.com/cdrAbhi/Spring-boot-war-file.git'
+                slackSend channel: 'jenkins', message: 'jobs  started'
+               
+                // Build and run tests
+                bat 'mvn test'
+                
+                }
+            }
+        }
+
+        stage('Build and Archive') {
+            steps {
+                script {
+                    // Build the project
+                    bat 'mvn package'
+
+                    // Archive the artifact
+                    archiveArtifacts artifacts: 'target/*.war', fingerprint: true
+                }
+            }
+        }
+
+        stage('Build-Test-Deploy') {
+            steps {
+                 script {
+                // Placeholder echo statement
+                deploy adapters: [tomcat9(credentialsId: '1234', path: '', url: 'http://52.55.173.50:8080')], contextPath: '/app', war: '**/*.war'
+                echo "😊😊 succesfully Build-Test-Deployd 😊😊😊"
+                     
+                 }
+            }
+        }
+
+        
+        stage('Deploy on Production') {
+            input{
+                message "should we continue"
+                ok "yes we should"
+            }
+            steps {
+                 script {
+                // Placeholder echo statement
+                 echo "🤷‍♂️🤷‍♂️🤷‍♂️-->Deploying on production🤷‍♀️🤷‍♀️🤷‍♀️"
+                 deploy adapters: [tomcat9(credentialsId: '1234', path: '', url: 'http://54.173.151.23:8080')], contextPath: '/app', war: '**/*.war'
+               
+                 }
+            }
+        }
+    }
+     post{
+        always{
+            echo "========always========"
+        }
+        success{
+            echo "========pipeline executed successfully ========"
+             slackSend channel: 'jenkins', message: 'Success'
+        }
+        failure{
+            echo "========pipeline execution failed========"
+             slackSend channel: 'jenkins', message: 'Job Failed'
+        }
+    }
+    
+}

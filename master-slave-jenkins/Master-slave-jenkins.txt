@@ -1,0 +1,82 @@
+||lecture=38||
+============
+
+Master-Slave architecture
+============================
+ jenkins khahi fail na ho esliye hm jenkins ko other distributer like linux ,window ,os machine pr integrate kr dete hai jha hmare
+ machine ka jenkins as a master and other machine as a slaves kam krte hai..
+ Advantage:
+     :High scalability
+     :Minimum chance to failures
+     :we can configure that which job run on which machin slaves
+Master-Slave architecture, also known as Master-Worker architecture, is a design pattern where one device or process (the master) controls one or more other devices or processes (the slaves). This architecture is commonly used in distributed computing systems for improved scalability, fault tolerance, and parallel processing. Here are the key features and reasons for using Master-Slave architecture:
+### Features of Master-Slave Architecture:
+
+1. **Parallel Processing:**
+   - The master distributes tasks or workloads among multiple slaves.
+   - Slaves work concurrently on their assigned tasks, enabling parallel processing and faster execution.
+
+2. **Scalability:**
+   - As the workload increases, more slaves can be added to the system to handle the additional tasks.
+   - Scalability is achieved by distributing the load across multiple processing units.
+
+3. **Fault Tolerance:**
+   - If one slave fails or becomes unavailable, the system can still continue to operate using the remaining slaves.
+   - The master can reassign tasks to other available slaves, ensuring continued processing even in the presence of failures.
+
+4. **Load Balancing:**
+   - The master can intelligently distribute tasks based on the load of each slave, ensuring a balanced distribution of work.
+   - Load balancing helps optimize resource utilization and improve overall system performance.
+
+5. **Centralized Control:**
+   - The master coordinates and controls the overall operation of the system.
+   - It manages task distribution, collects results, and makes decisions based on the aggregated information.
+
+6. **Resource Utilization:**
+   - Resources, such as CPU and memory, are efficiently utilized as tasks are distributed across multiple nodes.
+   - This leads to optimal usage of available resources in the system.
+
+### Use Cases and Reasons for Using Master-Slave Architecture:
+
+1. **Distributed Computing:**
+   - Master-Slave architecture is commonly used in distributed computing environments where tasks need to be performed concurrently across multiple nodes.
+
+2. **Data Processing:**
+   - In data-intensive applications, tasks like data analysis, transformation, and aggregation can be distributed among slaves for faster processing.
+
+3. **High-Performance Computing (HPC):**
+   - HPC applications often involve complex computations that can be divided into parallelizable tasks, making Master-Slave architecture suitable for such scenarios.
+
+4. **Fault Tolerance and Reliability:**
+   - The architecture enhances system reliability by allowing the system to continue operating even if some nodes fail.
+
+5. **Scalability:**
+   - Master-Slave architecture enables easy scaling by adding more slaves to handle increased workloads, making it suitable for growing systems.
+
+6. **Batch Processing:**
+   - In batch processing systems, tasks can be distributed and processed concurrently, leading to faster completion of batch jobs.
+
+In summary, Master-Slave architecture provides a flexible and scalable approach to distributed computing, making it well-suited for applications that require parallel processing, fault tolerance, and efficient resource utilization.
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+step-1
+======
+what we do ?
+we create two job 1 for linux and one for window and according to that we provide some script
+how to do that in jenkins 
+1.go to cloud create new node go and see picture provide credential for more info see image
+2.lanucn aws ec-2 instance create a jenkins dir in /var dir and change ownership of jenkins by--->(chown ubuntu:ubuntu jenkins/)
+3.install java same as available in your jenkins environment by -->(apt install openjdk-<version>-jre-headless)
+4.if you want to run a specific job on specific node you can do that using label name by configure job option -->(Restrict where this project can be run)
+
+step-2
+=======
+what we do ?
+we create two job 1 for linux and one for window and according to that we provide some script
+----------------------------------------------------------------------------
+
+
+

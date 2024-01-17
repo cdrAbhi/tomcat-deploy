@@ -1,0 +1,30 @@
+we create 4 job (a-test --> b-build --> c-build-test --> c-buildz-deploy) how to ceate go and see image 
+
+how to configure server for tomcat9
+------------------------------------------
+1.create 2 ec-2 instance 1 form testing 2 for deploy
+2.in both instance install tomcat9 and tocat9-admin(go to /var/lib/tomcat9/conf and open ->  vim tomcat-users.xml and past)
+-------------------------------------------------------------------------------------------------------------
+  <role rolename="manager-gui"/>
+ <user username="abhi" password="9954" roles="manager-gui,manager-script,manager-jmx,manager-status"/>
+--------------------------------------------------------------------------------------------------------------
+
+3.for access instance use public-ip:8080
+
+4.for access .war file instance use public-ip:8080/app
+
+=============================================================================================================================
+jenkins configuration requirement 
+---------------------------------
+1)Plugin
+ -->.maven integuration,container ,copy Artifacte,Build Pipelie,
+
+2)jobs
+  a)a-test : clone github,build other project-b-build 
+  b)b-build : clone github,build other project -> c-build-test, give permission to copy Artifact to c*,create Artifact
+  c)c-build-test :  build other project manually -> c-buildz-deploy,copy Artifact to c-build-test,create Artifact,Deploy war/ear to a container
+  d)c-buildz-test :copy Artifact to c-build-test,Deploy war/ear to a container
+
+Over all we create a Atomation that is used to test buil build-test deploy an Application from github also when ever anything change in github repo
+our this process is again run Automatically
+  
